@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 80:80
+    build:
+      context: .
+      dockerfile: Dockerfile_word
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: cyamaryan
+      WORDPRESS_DB_PASSWORD: python
+      WORDPRESS_DB_NAME: wordpressdb
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 13306:3306
+    build:
+      context: .
+      dockerfile: Dockerfile_db
+    environment:
+      MYSQL_DATABASE: wordpressdb
+      MYSQL_USER: cyamaryan
+      MYSQL_PASSWORD: python
+      MYSQL_ROOT_PASSWORD: saetomo
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:

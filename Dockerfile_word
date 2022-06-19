@@ -1,0 +1,3 @@
+FROM wordpress
+
+COPY ./apache2.conf /etc/apache2
